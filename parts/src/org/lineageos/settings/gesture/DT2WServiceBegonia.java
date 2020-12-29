@@ -1,4 +1,4 @@
-package org.lineageos.dt2w.begonia;
+package org.lineageos.settings.gesture;
 
 import android.app.Service;
 import android.content.ContentResolver;

@@ -21,10 +21,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.os.UserHandle;
 
 import org.lineageos.settings.dirac.DiracUtils;
 import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.thermal.ThermalUtils;
+import org.lineageos.settings.gesture.DT2WServiceBegonia;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
 
@@ -34,6 +36,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (DEBUG) Log.d(TAG, "Received boot completed intent");
+        Intent sIntent = new Intent(context, DT2WServiceBegonia.class);
+        context.startServiceAsUser(sIntent, UserHandle.CURRENT);
         DiracUtils.initialize();
         DozeUtils.checkDozeService(context);
         ThermalUtils.startService(context);
